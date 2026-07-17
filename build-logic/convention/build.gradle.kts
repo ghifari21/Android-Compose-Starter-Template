@@ -1,5 +1,4 @@
 import org.gradle.initialization.DependenciesAccessors
-import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.support.serviceOf
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -43,6 +42,22 @@ tasks {
 
 gradlePlugin {
     plugins {
+        register("androidApplication") {
+            id = "convention.android.application"
+            implementationClass = "modules.AndroidApplicationModuleConventionPlugin"
+        }
 
+        register("androidLibrary") {
+            id = "convention.android.library"
+            implementationClass = "plugins.AndroidLibraryConventionPlugin"
+        }
+        register("composeLibrary") {
+            id = "convention.compose.library"
+            implementationClass = "plugins.ComposeLibraryConventionPlugin"
+        }
+        register("hiltLibrary") {
+            id = "convention.hilt"
+            implementationClass = "plugins.HiltConventionPlugin"
+        }
     }
 }

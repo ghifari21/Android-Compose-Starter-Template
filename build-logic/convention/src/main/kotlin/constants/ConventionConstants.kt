@@ -1,5 +1,12 @@
 package constants
 
+import ext.debugImplementation
+import ext.implementation
+import ext.libs
+import ext.releaseImplementation
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
+
 internal object ConventionConstants {
     val commonModule = ":common"
     val coreModules = listOf(
@@ -17,4 +24,43 @@ internal object ConventionConstants {
     const val MAX_SDK_VERSION = 35
     const val KSP = "ksp"
     const val FREE_COMPILER = "-opt-in=kotlin.RequiresOptIn"
+
+    fun Project.injectComposeDependencies() {
+        dependencies {
+            val bom = libs.androidx.compose.bom.get()
+            implementation(platform(bom))
+            implementation(libs.androidx.activity.compose.get())
+            implementation(libs.androidx.appcompat.get())
+            implementation(libs.androidx.compose.material3.get())
+            implementation(libs.androidx.compose.ui.tooling.preview.get())
+            debugImplementation(libs.androidx.compose.ui.tooling.debug.get())
+            implementation(libs.androidx.core.ktx.get())
+            implementation(libs.coil.compose.get())
+            implementation(libs.coil.network.get())
+            implementation(libs.coil.video.get())
+            implementation(libs.timber.get())
+            implementation(libs.material.icons.core.get())
+            implementation(libs.material.icons.extended.get())
+            implementation(libs.androidx.compose.ui.text.google.fonts.get())
+        }
+    }
+
+    fun Project.injectDataDependencies() {
+        dependencies {
+            implementation(platform(coreModules[1]))
+            implementation(platform(coreModules[2]))
+            implementation(libs.datastore.preferences.get())
+            implementation(libs.okhttp.core.get())
+            implementation(libs.okhttp.logging.interceptor.get())
+            implementation(libs.retrofit.core.get())
+            implementation(libs.retrofit.converter.kotlinx.serialization.get())
+            implementation(libs.room.runtime.get())
+            implementation(libs.timber.get())
+            implementation(libs.kotlinx.coroutines.android.get())
+            implementation(libs.kotlinx.serialization.json.get())
+            add(KSP, libs.room.compiler.get())
+            debugImplementation(libs.chucker.debug.get())
+            releaseImplementation(libs.chucker.release.get())
+        }
+    }
 }

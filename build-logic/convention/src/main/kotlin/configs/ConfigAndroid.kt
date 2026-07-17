@@ -1,5 +1,6 @@
 package configs
 
+import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import constants.ConventionConstants
 import org.gradle.api.JavaVersion
@@ -8,29 +9,31 @@ import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-internal fun Project.configAndroid(libraryExtension: LibraryExtension) {
-    libraryExtension.apply {
+internal fun Project.configAndroid(extension: CommonExtension) {
+    extension.apply {
         namespace =
             "${ConventionConstants.BASE_NAME}.${project.path.replace(":", ".").substring(1)}"
         compileSdk = ConventionConstants.MAX_SDK_VERSION
-        defaultConfig {
+        
+        defaultConfig.apply {
             minSdk = ConventionConstants.MIN_SDK_VERSION
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-            consumerProguardFiles("consumer-rules.pro")
-        }
-        buildFeatures {
-            buildConfig = true
-        }
-        buildTypes {
-            release {
-                isMinifyEnabled = false
-                proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-                )
+            if (extension is LibraryExtension) {
+                extension.defaultConfig.consumerProguardFiles("consumer-rules.pro")
             }
         }
-        compileOptions {
+        
+        buildFeatures.buildConfig = true
+        
+        buildTypes.getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        
+        compileOptions.apply {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
