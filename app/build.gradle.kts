@@ -28,5 +28,6 @@ android {
 }
 
 dependencies {
+    implementation(projects.common)
     implementation(projects.core.data)
 }
