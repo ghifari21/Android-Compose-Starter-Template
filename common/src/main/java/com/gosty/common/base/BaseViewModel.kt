@@ -1,0 +1,54 @@
+package com.gosty.common.base
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+
+/**
+ * A base class for ViewModels that follows the MVI (Model-View-Intent) pattern.
+ *
+ * It manages the UI state and one-time events (side effects) using Kotlin Coroutines and Flow.
+ *
+ * @param S The type representing the UI state.
+ * @param E The type representing one-time events (e.g., navigation, showing a Snackbar).
+ * @param initialState The initial state of the UI when the ViewModel is created.
+ */
+abstract class BaseViewModel<S, E>(initialState: S) : ViewModel() {
+
+    private val _uiState: MutableStateFlow<S> = MutableStateFlow(initialState)
+    val uiState: StateFlow<S>
+        get() = _uiState.asStateFlow()
+
+    private val _uiEvent = Channel<E>()
+    val uiEvent: Flow<E>
+        get() = _uiEvent.receiveAsFlow()
+
+    protected fun updateState(reducer: S.() -> S) {
+        _uiState.value = _uiState.value.reducer()
+    }
+
+    protected suspend fun sendEvent(event: E) {
+        _uiEvent.send(event)
+    }
+
+    protected fun launchAsync(
+        onLoading: (Boolean) -> Unit,
+        block: suspend () -> Unit
+    ) {
+        viewModelScope.launch {
+            onLoading(true)
+
+            try {
+                block()
+            } finally {
+                onLoading(false)
+            }
+        }
+    }
+}
