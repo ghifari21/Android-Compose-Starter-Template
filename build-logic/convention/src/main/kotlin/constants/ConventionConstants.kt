@@ -14,7 +14,7 @@ internal object ConventionConstants {
     val coreModules = listOf(
         ":core:data",
         ":core:domain",
-        ":core:models",
+        ":core:model",
         ":core:navigation"
     )
     val resourceExcludes = listOf(
@@ -49,9 +49,9 @@ internal object ConventionConstants {
 
     fun Project.injectDataDependencies() {
         dependencies {
-            implementation(platform(commonModule))
-            implementation(platform(coreModules[1]))
-            implementation(platform(coreModules[2]))
+            implementation(project(commonModule))
+            implementation(project(coreModules[1]))
+            implementation(project(coreModules[2]))
             implementation(libs.datastore.preferences.get())
             implementation(libs.okhttp.core.get())
             implementation(libs.okhttp.logging.interceptor.get())

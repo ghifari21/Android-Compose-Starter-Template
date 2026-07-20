@@ -54,6 +54,10 @@ gradlePlugin {
             id = "convention.common"
             implementationClass = "modules.CommonModuleConventionPlugin"
         }
+        register("model") {
+            id = "convention.model"
+            implementationClass = "modules.ModelModuleConventionPlugin"
+        }
 
         register("androidLibrary") {
             id = "convention.android.library"

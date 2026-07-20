@@ -115,6 +115,7 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 convention-android-application = { id = "convention.android.application" }
 convention-data = { id = "convention.data" }
 convention-common = { id = "convention.common" }
+convention-model = { id = "convention.model" }
 
 convention-android-library = { id = "convention.android.library" }
 convention-compose-library = { id = "convention.compose.library" }
