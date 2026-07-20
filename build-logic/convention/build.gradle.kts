@@ -58,6 +58,10 @@ gradlePlugin {
             id = "convention.model"
             implementationClass = "modules.ModelModuleConventionPlugin"
         }
+        register("domain") {
+            id = "convention.domain"
+            implementationClass = "modules.DomainModuleConventionPlugin"
+        }
 
         register("androidLibrary") {
             id = "convention.android.library"

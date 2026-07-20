@@ -116,6 +116,7 @@ convention-android-application = { id = "convention.android.application" }
 convention-data = { id = "convention.data" }
 convention-common = { id = "convention.common" }
 convention-model = { id = "convention.model" }
+convention-domain = { id = "convention.domain" }
 
 convention-android-library = { id = "convention.android.library" }
 convention-compose-library = { id = "convention.compose.library" }

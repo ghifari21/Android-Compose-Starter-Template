@@ -10,12 +10,12 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 internal object ConventionConstants {
-    val commonModule = ":common"
     val coreModules = listOf(
         ":core:data",
         ":core:domain",
         ":core:model",
-        ":core:navigation"
+        ":core:navigation",
+        ":common"
     )
     val resourceExcludes = listOf(
         "/META-INF/{AL2.0,LGPL2.1}",
@@ -23,7 +23,7 @@ internal object ConventionConstants {
     )
     const val BASE_NAME = "com.project.starter"
     const val MIN_SDK_VERSION = 28
-    const val MAX_SDK_VERSION = 35
+    const val MAX_SDK_VERSION = 37
     const val KSP = "ksp"
     const val FREE_COMPILER = "-opt-in=kotlin.RequiresOptIn"
 
@@ -49,7 +49,7 @@ internal object ConventionConstants {
 
     fun Project.injectDataDependencies() {
         dependencies {
-            implementation(project(commonModule))
+            implementation(project(coreModules.last()))
             implementation(project(coreModules[1]))
             implementation(project(coreModules[2]))
             implementation(libs.datastore.preferences.get())
