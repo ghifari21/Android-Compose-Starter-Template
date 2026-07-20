@@ -46,6 +46,10 @@ gradlePlugin {
             id = "convention.android.application"
             implementationClass = "modules.AndroidApplicationModuleConventionPlugin"
         }
+        register("data") {
+            id = "convention.data"
+            implementationClass = "modules.DataModuleConventionPlugin"
+        }
 
         register("androidLibrary") {
             id = "convention.android.library"

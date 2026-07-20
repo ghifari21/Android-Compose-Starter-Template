@@ -1,9 +1,11 @@
 package constants
 
+import ext.androidTestImplementation
 import ext.debugImplementation
 import ext.implementation
 import ext.libs
 import ext.releaseImplementation
+import ext.testImplementation
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
@@ -47,6 +49,7 @@ internal object ConventionConstants {
 
     fun Project.injectDataDependencies() {
         dependencies {
+            implementation(platform(commonModule))
             implementation(platform(coreModules[1]))
             implementation(platform(coreModules[2]))
             implementation(libs.datastore.preferences.get())
@@ -61,6 +64,15 @@ internal object ConventionConstants {
             add(KSP, libs.room.compiler.get())
             debugImplementation(libs.chucker.debug.get())
             releaseImplementation(libs.chucker.release.get())
+        }
+    }
+
+    fun Project.injectTestDependencies() {
+        dependencies {
+            testImplementation(libs.junit.get())
+            testImplementation(libs.kotlinx.coroutines.test.get())
+            androidTestImplementation(libs.androidx.junit.get())
+            androidTestImplementation(libs.androidx.espresso.core.get())
         }
     }
 }

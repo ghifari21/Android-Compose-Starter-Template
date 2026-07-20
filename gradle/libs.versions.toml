@@ -113,6 +113,8 @@ room-db = { id = "androidx.room", version.ref = "room" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
 convention-android-application = { id = "convention.android.application" }
+convention-data = { id = "convention.data" }
+
 convention-android-library = { id = "convention.android.library" }
 convention-compose-library = { id = "convention.compose.library" }
 convention-hilt = { id = "convention.hilt" }

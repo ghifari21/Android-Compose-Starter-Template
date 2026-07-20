@@ -3,6 +3,7 @@ package plugins
 import com.android.build.api.dsl.LibraryExtension
 import configs.configAndroid
 import constants.ConventionConstants.MAX_SDK_VERSION
+import constants.ConventionConstants.injectTestDependencies
 import ext.alias
 import ext.libs
 import org.gradle.api.Plugin
@@ -23,6 +24,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 testOptions.targetSdk = MAX_SDK_VERSION
                 lint.targetSdk = MAX_SDK_VERSION
             }
+
+            injectTestDependencies()
         }
     }
 }

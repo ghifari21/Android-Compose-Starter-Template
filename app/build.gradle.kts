@@ -27,4 +27,6 @@ android {
     }
 }
 
-dependencies {}
+dependencies {
+    implementation(projects.core.data)
+}

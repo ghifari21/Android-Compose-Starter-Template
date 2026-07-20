@@ -31,5 +31,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Android-Project-Template"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
- 
+include(":core:data")
