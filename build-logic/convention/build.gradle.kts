@@ -62,6 +62,10 @@ gradlePlugin {
             id = "convention.domain"
             implementationClass = "modules.DomainModuleConventionPlugin"
         }
+        register("navigation") {
+            id = "convention.navigation"
+            implementationClass = "modules.NavigationModuleConventionPlugin"
+        }
 
         register("androidLibrary") {
             id = "convention.android.library"
