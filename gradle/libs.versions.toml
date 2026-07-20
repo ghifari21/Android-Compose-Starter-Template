@@ -118,6 +118,7 @@ convention-common = { id = "convention.common" }
 convention-model = { id = "convention.model" }
 convention-domain = { id = "convention.domain" }
 convention-navigation = { id = "convention.navigation" }
+convention-feature = { id = "convention.feature" }
 
 convention-android-library = { id = "convention.android.library" }
 convention-compose-library = { id = "convention.compose.library" }
