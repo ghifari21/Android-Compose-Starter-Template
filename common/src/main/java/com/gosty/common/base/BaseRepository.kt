@@ -17,6 +17,27 @@ import timber.log.Timber
 abstract class BaseRepository {
 
     /**
+     * Executes a suspendable block of code and returns a [Flow] of [Result] with data transformation.
+     *
+     * @param T The type of the data returned by the block.
+     * @param R The type of the data after transformation.
+     * @param dispatcher The [CoroutineDispatcher] on which the block should be executed. Defaults to [Dispatchers.IO].
+     * @param block The suspendable block of code to execute.
+     * @param transform A lambda expression to transform the data from [T] to [R].
+     * @return A [Flow] that emits [Result.success] with transformed data or [Result.failure] on error.
+     */
+    protected fun <T, R> safeCall(
+        dispatcher: CoroutineDispatcher = Dispatchers.IO,
+        block: suspend () -> T,
+        transform: (T) -> R
+    ): Flow<Result<R>> = flow {
+        emit(Result.success(transform(block())))
+    }.catch { e ->
+        Timber.e(e)
+        emit(Result.failure(e))
+    }.flowOn(dispatcher)
+
+    /**
      * Executes a suspendable block of code and returns a [Flow] of [Result].
      *
      * @param T The type of the data returned by the block.
@@ -27,10 +48,5 @@ abstract class BaseRepository {
     protected fun <T> safeCall(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         block: suspend () -> T
-    ): Flow<Result<T>> = flow {
-        emit(Result.success(block()))
-    }.catch { e ->
-        Timber.e(e)
-        emit(Result.failure(e))
-    }.flowOn(dispatcher)
+    ): Flow<Result<T>> = safeCall(dispatcher, block) { it }
 }

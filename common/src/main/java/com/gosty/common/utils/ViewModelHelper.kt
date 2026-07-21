@@ -1,4 +1,4 @@
-package com.gosty.common.helpers
+package com.gosty.common.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
