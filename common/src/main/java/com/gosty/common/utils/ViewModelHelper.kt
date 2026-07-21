@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import com.gosty.common.base.BaseViewModel
+import com.gosty.common.base.UiState
 import kotlinx.coroutines.flow.collectLatest
 
 /**
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.collectLatest
  * @return A [State] object representing the current UI state, which triggers recomposition upon change.
  */
 @Composable
-inline fun <reified S, reified E> BaseViewModel<S, E>.collectMvi(
+inline fun <reified S : UiState, reified E> BaseViewModel<S, E>.collectMvi(
     crossinline onEvent: (E) -> Unit
 ): State<S> {
     val state = this.uiState.collectAsState()
