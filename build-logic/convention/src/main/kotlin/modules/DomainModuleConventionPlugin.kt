@@ -1,5 +1,6 @@
 package modules
 
+import constants.ConventionConstants
 import ext.alias
 import ext.implementation
 import ext.libs
@@ -14,6 +15,7 @@ class DomainModuleConventionPlugin : Plugin<Project> {
 
             dependencies {
                 implementation(libs.kotlinx.coroutines.android)
+                implementation(project(ConventionConstants.coreModules[2]))
             }
         }
     }
