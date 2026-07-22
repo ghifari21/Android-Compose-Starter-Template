@@ -3,10 +3,10 @@ plugins {
 }
 
 android {
-    namespace = "com.gosty.android_project_template"
+    namespace = "com.project.starter"
 
     defaultConfig {
-        applicationId = "com.gosty.android_project_template"
+        applicationId = "com.project.starter"
         versionCode = 1
         versionName = "1.0"
 

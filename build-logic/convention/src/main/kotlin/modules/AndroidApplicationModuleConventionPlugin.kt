@@ -4,6 +4,7 @@ import com.android.build.api.dsl.ApplicationExtension
 import configs.configAndroid
 import configs.configJetpackCompose
 import constants.ConventionConstants
+import constants.ConventionConstants.injectTestDependencies
 import ext.alias
 import ext.libs
 import org.gradle.api.Plugin
@@ -27,6 +28,8 @@ class AndroidApplicationModuleConventionPlugin : Plugin<Project> {
                     resources.excludes.addAll(ConventionConstants.resourceExcludes)
                 }
             }
+
+            injectTestDependencies()
         }
     }
 }
