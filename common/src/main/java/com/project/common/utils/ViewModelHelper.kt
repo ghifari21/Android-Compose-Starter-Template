@@ -9,22 +9,23 @@ import com.project.common.base.UiState
 import kotlinx.coroutines.flow.collectLatest
 
 /**
- * Collects the UI state and one-time UI events from the [BaseViewModel] in a lifecycle-aware manner.
+ * Collects the UI state and one-time UI effects from the [BaseViewModel] in a lifecycle-aware manner.
  *
- * @param S The type representing the UI state.
- * @param E The type representing one-time UI events.
- * @param onEvent A lambda expression invoked whenever a new UI event is emitted.
- * @return A [State] object representing the current UI state, which triggers recomposition upon change.
+ * @param Event The type representing UI events.
+ * @param StateData The type representing the UI state data.
+ * @param Effect The type representing one-time UI effects.
+ * @param onEffect A lambda expression invoked whenever a new UI effect is emitted.
+ * @return A [State] object representing the current [UiState], which triggers recomposition upon change.
  */
 @Composable
-inline fun <reified S : UiState, reified E> BaseViewModel<S, E>.collectMvi(
-    crossinline onEvent: (E) -> Unit
-): State<S> {
+inline fun <reified Event, reified StateData, reified Effect> BaseViewModel<Event, StateData, Effect>.collectMvi(
+    crossinline onEffect: (Effect) -> Unit
+): State<UiState<StateData>> {
     val state = this.uiState.collectAsState()
 
     LaunchedEffect(Unit) {
-        this@collectMvi.uiEvent.collectLatest { event ->
-            onEvent(event)
+        this@collectMvi.effect.collectLatest { effectValue ->
+            onEffect(effectValue)
         }
     }
 
