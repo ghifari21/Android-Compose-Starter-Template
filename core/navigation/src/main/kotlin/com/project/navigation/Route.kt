@@ -1,5 +1,9 @@
 package com.project.navigation
 
-val bottomNavDestinations = listOf<String>()
+/**
+ * Lists the bottom navigation destinations.
+ * In Type-safe navigation, routes are represented as @Serializable classes/objects (Any).
+ */
+val bottomNavDestinations = listOf<Any>()
 
 val navItem = listOf<Screen>()

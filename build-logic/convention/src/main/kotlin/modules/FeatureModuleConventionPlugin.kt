@@ -14,6 +14,7 @@ class FeatureModuleConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 alias(libs.plugins.convention.android.library)
                 alias(libs.plugins.convention.compose.library)
+                alias(libs.plugins.convention.navigation)
             }
 
             dependencies {

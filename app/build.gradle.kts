@@ -31,4 +31,5 @@ dependencies {
     implementation(projects.common)
     implementation(projects.core.domain)
     implementation(projects.core.navigation)
+    implementation(projects.feat.home)
 }
