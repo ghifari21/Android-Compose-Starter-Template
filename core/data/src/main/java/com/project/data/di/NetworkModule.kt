@@ -34,9 +34,13 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor
+        @dagger.hilt.android.qualifiers.ApplicationContext context: android.content.Context,
+        loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: com.project.data.source.remote.interceptor.AuthInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(com.chuckerteam.chucker.api.ChuckerInterceptor(context))
             .addInterceptor(loggingInterceptor)
             .build()
 
