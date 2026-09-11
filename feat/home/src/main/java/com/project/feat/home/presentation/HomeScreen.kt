@@ -44,6 +44,8 @@ fun HomeScreen(
         }
     }
 
+    com.project.common.notification.NotificationPermissionEffect()
+
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
@@ -67,6 +69,16 @@ fun HomeScreen(
                     }
                 }
             )
+
+            // Trigger Notification Button
+            androidx.compose.material3.Button(
+                onClick = { viewModel.setEvent(HomeEvent.OnTriggerNotification) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {
+                Text("Trigger Local Notification")
+            }
 
             // Content Area
             Box(modifier = Modifier.fillMaxSize()) {

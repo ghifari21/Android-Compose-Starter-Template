@@ -19,7 +19,9 @@ internal fun Project.configAndroid(extension: CommonExtension) {
             minSdk = ConventionConstants.MIN_SDK_VERSION
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             if (extension is LibraryExtension) {
-                extension.defaultConfig.consumerProguardFiles("consumer-rules.pro")
+                if (project.file("consumer-rules.pro").exists()) {
+                    extension.defaultConfig.consumerProguardFiles("consumer-rules.pro")
+                }
             }
         }
         

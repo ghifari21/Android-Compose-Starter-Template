@@ -7,7 +7,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val searchItemsUseCase: SearchItemsUseCase
+    private val searchItemsUseCase: SearchItemsUseCase,
+    private val notificationManager: com.project.common.notification.AppNotificationManager
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(HomeState()) {
 
     init {
@@ -29,6 +30,13 @@ class HomeViewModel @Inject constructor(
             }
             is HomeEvent.OnItemClicked -> {
                 setEffect { HomeEffect.NavigateToDetail(event.id, event.title) }
+            }
+            is HomeEvent.OnTriggerNotification -> {
+                notificationManager.showNotification(
+                    notificationId = 1,
+                    title = "Hello from Starter Template!",
+                    message = "This is a local notification triggered via Hilt DI."
+                )
             }
         }
     }

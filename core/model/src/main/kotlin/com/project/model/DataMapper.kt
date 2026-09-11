@@ -5,7 +5,7 @@ import com.project.model.model.ExampleModel
 import com.project.model.request.ExampleRequest
 import com.project.model.response.ExampleResponse
 
-fun ExampleModel.toEntity() = ExampleEntity(id = this.id)
+fun ExampleModel.toEntity() = ExampleEntity(id = this.id ?: "")
 
 fun ExampleModel.toRequest() = ExampleRequest(id = this.id)
 

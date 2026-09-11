@@ -18,6 +18,8 @@ class AndroidApplicationModuleConventionPlugin : Plugin<Project> {
                 alias(libs.plugins.android.application)
                 alias(libs.plugins.kotlin.compose)
                 alias(libs.plugins.convention.hilt)
+                alias(libs.plugins.convention.lint)
+                alias(libs.plugins.convention.flavor)
             }
 
             extensions.configure<ApplicationExtension> {

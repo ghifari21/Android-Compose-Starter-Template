@@ -5,6 +5,8 @@ agp = "9.3.0"
 androidTools = "32.2.1"
 ksp = "2.3.7"
 coreKtx = "1.19.0"
+spotless = "6.25.0"
+detekt = "1.23.6"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
@@ -101,6 +103,9 @@ android-tools-common = { group = "com.android.tools", name = "common", version.r
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-metadataJvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+spotless-gradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
+detekt-gradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
+detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -123,4 +128,6 @@ convention-feature = { id = "convention.feature" }
 convention-android-library = { id = "convention.android.library" }
 convention-compose-library = { id = "convention.compose.library" }
 convention-hilt = { id = "convention.hilt" }
+convention-lint = { id = "convention.lint" }
+convention-flavor = { id = "convention.flavor" }
 

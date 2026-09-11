@@ -12,6 +12,7 @@ sealed class HomeEvent {
     data class OnSearchQueryChanged(val query: String) : HomeEvent()
     object OnSearchClicked : HomeEvent()
     data class OnItemClicked(val id: String, val title: String) : HomeEvent()
+    object OnTriggerNotification : HomeEvent()
 }
 
 sealed class HomeEffect {

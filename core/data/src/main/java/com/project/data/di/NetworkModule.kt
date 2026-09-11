@@ -40,7 +40,7 @@ object NetworkModule {
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
-            .addInterceptor(com.chuckerteam.chucker.api.ChuckerInterceptor(context))
+            .addInterceptor(com.chuckerteam.chucker.api.ChuckerInterceptor.Builder(context).build())
             .addInterceptor(loggingInterceptor)
             .build()
 
@@ -48,10 +48,11 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        json: Json
+        json: Json,
+        baseUrl: BaseUrl
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://example.com/") // Placeholder URL
+            .baseUrl(baseUrl.value)
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()

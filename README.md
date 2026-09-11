@@ -11,6 +11,7 @@ A modern, production-ready, highly modularized Android Jetpack Compose starter t
 - **Network Layer:** Retrofit + OkHttp + Kotlinx Serialization + Chucker (for intercepting API logs)
 - **Local Storage:** Room Database & DataStore Preferences
 - **Build System:** Gradle Kotlin DSL with **Convention Plugins** (`build-logic`) ala *Now-in-Android*.
+- **CI/CD:** Pre-configured GitHub Actions for automated linting, testing, and APK artifact building.
 
 ---
 

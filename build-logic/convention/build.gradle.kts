@@ -27,6 +27,8 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
+    implementation(libs.spotless.gradlePlugin)
+    implementation(libs.detekt.gradlePlugin)
 
     gradle.serviceOf<DependenciesAccessors>().classes.asFiles.forEach { file ->
         compileOnly(files(file.absolutePath))
@@ -82,6 +84,14 @@ gradlePlugin {
         register("hiltLibrary") {
             id = "convention.hilt"
             implementationClass = "plugins.HiltConventionPlugin"
+        }
+        register("lint") {
+            id = "convention.lint"
+            implementationClass = "plugins.AndroidLintConventionPlugin"
+        }
+        register("flavor") {
+            id = "convention.flavor"
+            implementationClass = "plugins.AndroidFlavorConventionPlugin"
         }
     }
 }
