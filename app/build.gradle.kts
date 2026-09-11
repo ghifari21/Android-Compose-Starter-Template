@@ -33,4 +33,8 @@ dependencies {
     implementation(projects.core.domain)
     implementation(projects.core.navigation)
     implementation(projects.feat.home)
+
+    // For HiltWorkerFactory in BaseApp
+    implementation(libs.hilt.work)
+    implementation(libs.work.runtime.ktx)
 }

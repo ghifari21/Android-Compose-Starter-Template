@@ -14,6 +14,7 @@ sealed class HomeEvent {
     data class OnItemClicked(val id: String, val title: String) : HomeEvent()
     object OnTriggerNotification : HomeEvent()
     object OnTriggerLogout : HomeEvent()
+    object OnTriggerSync : HomeEvent()
 }
 
 sealed class HomeEffect {

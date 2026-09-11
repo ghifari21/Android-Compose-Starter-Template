@@ -59,10 +59,13 @@ internal object ConventionConstants {
             implementation(libs.retrofit.core.get())
             implementation(libs.retrofit.converter.kotlinx.serialization.get())
             implementation(libs.room.runtime.get())
+            implementation(libs.work.runtime.ktx.get())
+            implementation(libs.hilt.work.get())
             implementation(libs.timber.get())
             implementation(libs.kotlinx.coroutines.android.get())
             implementation(libs.kotlinx.serialization.json.get())
             add(KSP, libs.room.compiler.get())
+            add(KSP, libs.androidx.hilt.compiler.get())
             debugImplementation(libs.chucker.debug.get())
             releaseImplementation(libs.chucker.release.get())
         }

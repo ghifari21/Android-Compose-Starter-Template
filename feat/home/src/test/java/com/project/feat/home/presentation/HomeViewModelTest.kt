@@ -22,6 +22,7 @@ class HomeViewModelTest {
     private val searchItemsUseCase = mockk<SearchItemsUseCase>()
     private val notificationManager = mockk<AppNotificationManager>(relaxed = true)
     private val sessionManager = mockk<SessionManager>(relaxed = true)
+    private val syncRepository = mockk<com.project.domain.repository.SyncRepository>(relaxed = true)
 
     private lateinit val viewModel: HomeViewModel
 
@@ -29,7 +30,8 @@ class HomeViewModelTest {
         viewModel = HomeViewModel(
             searchItemsUseCase = searchItemsUseCase,
             notificationManager = notificationManager,
-            sessionManager = sessionManager
+            sessionManager = sessionManager,
+            syncRepository = syncRepository
         )
     }
 

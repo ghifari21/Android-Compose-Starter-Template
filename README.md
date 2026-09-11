@@ -34,13 +34,19 @@ When you clone this template for a new project, you can automatically configure 
 
 The project is highly modularized to ensure separation of concerns and faster build times:
 
-- **`app`**: The main entry point. Contains `BaseApp`, `MainActivity`, and the `MainScreen` (Bottom Navigation skeleton).
-- **`build-logic`**: Contains Gradle Convention Plugins. Instead of repeating dependencies, features just apply `alias(libs.plugins.convention.feature)`.
-- **`common`**: Core MVI classes (`BaseViewModel`, `UiState`), App Exceptions, Utils, and the Design System (`Theme`, `Colors`, `Type`).
-- **`core:data`**: The Data layer containing `NetworkModule`, `DatabaseModule`, `AuthInterceptor`, and `SessionManager`.
-- **`core:domain`**: Abstractions and UseCases.
-- **`core:navigation`**: Contains the `BaseNavHost` wrapper designed for Type-safe Navigation and smooth screen transitions.
-- **`feat:*`**: Feature modules containing Domain, Data, and Presentation logic for specific screens (e.g., `feat:home`).
+```text
+Android-Compose-Starter-Template/
+├── app/                  # Main entry point, BaseApp, MainActivity, AppRouter
+├── build-logic/          # Gradle Convention Plugins (ala Now-in-Android)
+├── common/               # Core MVI classes, UiState, AppExceptions, Design System (Theme, Colors)
+├── core/
+│   ├── data/             # NetworkModule, DatabaseModule, SessionManager, WorkManager, Repositories
+│   ├── domain/           # Abstractions, Models, and UseCases
+│   ├── navigation/       # Type-safe BaseNavHost wrapper for screen transitions
+│   └── testing/          # Test rules (MainDispatcherRule), Mocking utilities
+└── feat/                 # Feature modules (Domain, Data, Presentation)
+    └── home/             # Example Home feature with HomeScreen and HomeViewModel
+```
 
 ---
 

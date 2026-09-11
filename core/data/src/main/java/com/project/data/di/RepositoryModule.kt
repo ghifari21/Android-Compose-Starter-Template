@@ -17,4 +17,10 @@ abstract class RepositoryModule {
     abstract fun bindExampleRepository(
         exampleRepositoryImpl: ExampleRepositoryImpl
     ): ExampleRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindSyncRepository(
+        workManagerSyncRepository: com.project.data.repository.WorkManagerSyncRepository
+    ): com.project.domain.repository.SyncRepository
 }

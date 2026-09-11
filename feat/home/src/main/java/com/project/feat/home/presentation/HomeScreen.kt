@@ -93,6 +93,19 @@ fun HomeScreen(
                 Text("Logout")
             }
 
+            // Sync Data Button
+            androidx.compose.material3.Button(
+                onClick = { viewModel.setEvent(HomeEvent.OnTriggerSync) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiary
+                )
+            ) {
+                Text("Sync Data (WorkManager)")
+            }
+
             // Content Area
             Box(modifier = Modifier.fillMaxSize()) {
                 if (state.isLoading) {
