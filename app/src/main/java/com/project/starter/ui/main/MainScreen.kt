@@ -1,7 +1,12 @@
 package com.project.starter.ui.main
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -46,25 +51,64 @@ val bottomNavItems = listOf(
     // BottomNavItem("Profile", ProfileRoute::class, ProfileRoute, Icons.Filled.Person, Icons.Outlined.Person)
 )
 
+
 @Composable
 fun MainScreen(
+    windowSizeClass: WindowSizeClass,
     mainNavController: NavHostController = rememberNavController()
 ) {
-    Scaffold(
-        bottomBar = {
-            val navBackStackEntry by mainNavController.currentBackStackEntryAsState()
-            val currentDestination = navBackStackEntry?.destination
+    val isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
 
-            // Only show bottom bar if the current route is in the bottomNavItems
-            val isBottomBarVisible = bottomNavItems.any { item ->
-                currentDestination?.hierarchy?.any { it.hasRoute(item.route) } == true
+    val navBackStackEntry by mainNavController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    // Only show nav if the current route is in the bottomNavItems
+    val isNavVisible = bottomNavItems.any { item ->
+        currentDestination?.hierarchy?.any { it.hasRoute(item.route) } == true
+    }
+
+    if (isCompact) {
+        // Phone Layout: Bottom Navigation
+        Scaffold(
+            bottomBar = {
+                if (isNavVisible) {
+                    NavigationBar {
+                        bottomNavItems.forEach { item ->
+                            val isSelected = currentDestination?.hierarchy?.any { it.hasRoute(item.route) } == true
+                            NavigationBarItem(
+                                icon = {
+                                    Icon(
+                                        imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
+                                        contentDescription = item.title
+                                    )
+                                },
+                                label = { Text(item.title) },
+                                selected = isSelected,
+                                onClick = { navigateToTopLevel(mainNavController, item.routeObject) }
+                            )
+                        }
+                    }
+                }
             }
-
-            if (isBottomBarVisible) {
-                NavigationBar {
+        ) { innerPadding ->
+            BaseNavHost(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                navHostController = mainNavController,
+                startDestination = HomeRoute
+            ) {
+                homeGraph(mainNavController)
+            }
+        }
+    } else {
+        // Tablet/Foldable Layout: Navigation Rail
+        Row(modifier = Modifier.fillMaxSize()) {
+            if (isNavVisible) {
+                NavigationRail {
                     bottomNavItems.forEach { item ->
                         val isSelected = currentDestination?.hierarchy?.any { it.hasRoute(item.route) } == true
-                        NavigationBarItem(
+                        NavigationRailItem(
                             icon = {
                                 Icon(
                                     imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
@@ -73,30 +117,28 @@ fun MainScreen(
                             },
                             label = { Text(item.title) },
                             selected = isSelected,
-                            onClick = {
-                                mainNavController.navigate(item.routeObject) {
-                                    popUpTo(mainNavController.graph.startDestinationId) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
+                            onClick = { navigateToTopLevel(mainNavController, item.routeObject) }
                         )
                     }
                 }
             }
+            BaseNavHost(
+                modifier = Modifier.fillMaxSize(),
+                navHostController = mainNavController,
+                startDestination = HomeRoute
+            ) {
+                homeGraph(mainNavController)
+            }
         }
-    ) { innerPadding ->
-        BaseNavHost(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            navHostController = mainNavController,
-            startDestination = HomeRoute
-        ) {
-            // Register graphs that belong inside the Main bottom navigation skeleton
-            homeGraph(mainNavController)
+    }
+}
+
+private fun navigateToTopLevel(navController: NavHostController, route: Any) {
+    navController.navigate(route) {
+        popUpTo(navController.graph.startDestinationId) {
+            saveState = true
         }
+        launchSingleTop = true
+        restoreState = true
     }
 }

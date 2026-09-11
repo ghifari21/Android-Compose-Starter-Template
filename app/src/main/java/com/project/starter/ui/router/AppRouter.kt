@@ -14,6 +14,7 @@ import com.project.starter.ui.main.MainScreen
 
 @Composable
 fun AppRouter(
+    windowSizeClass: androidx.compose.material3.windowsizeclass.WindowSizeClass,
     viewModel: RouterViewModel = hiltViewModel()
 ) {
     val routerState by viewModel.routerState.collectAsStateWithLifecycle()
@@ -25,7 +26,7 @@ fun AppRouter(
             }
         }
         is RouterState.Authenticated -> {
-            MainScreen()
+            MainScreen(windowSizeClass = windowSizeClass)
         }
         is RouterState.Unauthenticated -> {
             AuthScreen()
