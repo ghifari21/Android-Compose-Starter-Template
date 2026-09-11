@@ -53,6 +53,7 @@ internal object ConventionConstants {
             implementation(project(coreModules[1]))
             implementation(project(coreModules[2]))
             implementation(libs.datastore.preferences.get())
+            implementation(libs.security.crypto.get())
             implementation(libs.okhttp.core.get())
             implementation(libs.okhttp.logging.interceptor.get())
             implementation(libs.retrofit.core.get())

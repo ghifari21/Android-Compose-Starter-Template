@@ -36,10 +36,12 @@ object NetworkModule {
     fun provideOkHttpClient(
         @dagger.hilt.android.qualifiers.ApplicationContext context: android.content.Context,
         loggingInterceptor: HttpLoggingInterceptor,
-        authInterceptor: com.project.data.source.remote.interceptor.AuthInterceptor
+        authInterceptor: com.project.data.network.AuthInterceptor,
+        tokenAuthenticator: com.project.data.network.TokenAuthenticator
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
+            .authenticator(tokenAuthenticator)
             .addInterceptor(com.chuckerteam.chucker.api.ChuckerInterceptor.Builder(context).build())
             .addInterceptor(loggingInterceptor)
             .build()
