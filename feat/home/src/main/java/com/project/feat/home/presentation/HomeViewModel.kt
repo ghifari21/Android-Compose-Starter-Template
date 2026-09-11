@@ -8,7 +8,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val searchItemsUseCase: SearchItemsUseCase,
-    private val notificationManager: com.project.common.notification.AppNotificationManager
+    private val notificationManager: com.project.common.notification.AppNotificationManager,
+    private val sessionManager: com.project.domain.repository.SessionManager
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(HomeState()) {
 
     init {
@@ -37,6 +38,11 @@ class HomeViewModel @Inject constructor(
                     title = "Hello from Starter Template!",
                     message = "This is a local notification triggered via Hilt DI."
                 )
+            }
+            is HomeEvent.OnTriggerLogout -> {
+                safeLaunch {
+                    sessionManager.clearSession()
+                }
             }
         }
     }

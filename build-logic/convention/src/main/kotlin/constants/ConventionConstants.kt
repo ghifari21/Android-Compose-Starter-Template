@@ -70,7 +70,10 @@ internal object ConventionConstants {
 
     fun Project.injectTestDependencies() {
         dependencies {
+            testImplementation(project(":core:testing"))
             testImplementation(libs.junit.get())
+            testImplementation(libs.mockk.get())
+            testImplementation(libs.turbine.get())
             testImplementation(libs.kotlinx.coroutines.test.get())
             androidTestImplementation(libs.androidx.junit.get())
             androidTestImplementation(libs.androidx.espresso.core.get())

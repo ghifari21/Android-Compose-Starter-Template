@@ -15,9 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-
             AppTheme {
-                MainScreen()
+                com.project.starter.ui.router.AppRouter()
             }
         }
     }

@@ -75,9 +75,22 @@ fun HomeScreen(
                 onClick = { viewModel.setEvent(HomeEvent.OnTriggerNotification) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .padding(horizontal = 16.dp, vertical = 4.dp)
             ) {
                 Text("Trigger Local Notification")
+            }
+            
+            // Logout Button
+            androidx.compose.material3.Button(
+                onClick = { viewModel.setEvent(HomeEvent.OnTriggerLogout) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.error
+                )
+            ) {
+                Text("Logout")
             }
 
             // Content Area
