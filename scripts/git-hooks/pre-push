@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "==============================================="
+echo "Menjalankan Pre-push Hook (Lint and Unit Test)"
+echo "==============================================="
+
+./gradlew spotlessCheck detekt testDebugUnitTest
+status=True
+
+if [ "" = 0 ] ; then
+    echo "[SUCCESS] Semua tes berhasil. Memproses push..."
+    exit 0
+else
+    echo "[ERROR] Terjadi kesalahan pada Linting atau Unit Test."
+    exit 1
+fi
