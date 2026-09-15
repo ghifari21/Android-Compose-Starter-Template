@@ -16,18 +16,25 @@ class AndroidLintConventionPlugin : Plugin<Project> {
                 kotlin {
                     target("**/*.kt")
                     targetExclude("**/build/**/*.kt")
-                    ktlint()
+                    ktlint().editorConfigOverride(mapOf(
+                        "ktlint_standard_function-naming" to "disabled",
+                        "ktlint_standard_property-naming" to "disabled"
+                    ))
                 }
                 kotlinGradle {
                     target("**/*.kts")
                     targetExclude("**/build/**/*.kts")
-                    ktlint()
+                    ktlint().editorConfigOverride(mapOf(
+                        "ktlint_standard_function-naming" to "disabled",
+                        "ktlint_standard_property-naming" to "disabled"
+                    ))
                 }
             }
 
             extensions.configure<DetektExtension> {
                 toolVersion = "1.23.6"
                 buildUponDefaultConfig = true
+                config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
             }
 
             dependencies.add("detektPlugins", "io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")

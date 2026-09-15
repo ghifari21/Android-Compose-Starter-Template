@@ -11,4 +11,4 @@ sealed class Screen(
     @StringRes val label: Int? = null,
     val activeIcon: ImageVector? = null,
     val inactiveIcon: ImageVector? = null
-)
+)

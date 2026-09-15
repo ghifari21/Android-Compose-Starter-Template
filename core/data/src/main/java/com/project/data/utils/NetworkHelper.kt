@@ -12,7 +12,7 @@ import java.net.HttpURLConnection
  */
 fun <T> Response<T>.handleResponse(): T {
     if (isSuccessful) {
-        return body() ?: throw Exception("Response body is null")
+        return body() ?: error("Response body is null")
     } else {
         throw handleApiError()
     }
