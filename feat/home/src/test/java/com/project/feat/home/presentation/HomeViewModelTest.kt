@@ -9,6 +9,7 @@ import com.project.testing.rules.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -24,7 +25,7 @@ class HomeViewModelTest {
     private val sessionManager = mockk<SessionManager>(relaxed = true)
     private val syncRepository = mockk<com.project.domain.repository.SyncRepository>(relaxed = true)
 
-    private lateinit val viewModel: HomeViewModel
+    private lateinit var viewModel: HomeViewModel
 
     private fun setupViewModel() {
         viewModel = HomeViewModel(
@@ -46,16 +47,11 @@ class HomeViewModelTest {
 
         // Act
         setupViewModel() // Loads initial data in init block
+        runCurrent() // Execute all pending coroutines in viewModelScope
 
         // Assert
-        viewModel.uiState.test {
-            val initialState = awaitItem()
-            // In a real MVI with safeLaunch, the state updates asynchronously.
-            // Turbine will catch the state emission.
-            val loadedState = awaitItem()
-            assertEquals(expectedItems, loadedState.data.items)
-            cancelAndIgnoreRemainingEvents()
-        }
+        assertEquals(expectedItems, viewModel.uiState.value.data.items)
+        assertEquals(false, viewModel.uiState.value.isLoading)
     }
 
     @Test
@@ -69,7 +65,7 @@ class HomeViewModelTest {
 
         // Assert
         // Allow coroutine to execute
-        kotlinx.coroutines.test.runCurrent()
+        runCurrent()
         coVerify(exactly = 1) { sessionManager.clearSession() }
     }
 }
