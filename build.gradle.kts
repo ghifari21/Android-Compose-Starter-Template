@@ -9,3 +9,13 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.room.db) apply false
 }
+tasks.register("installGitHooks", Copy::class) {
+    from(File(rootProject.rootDir, "scripts/git-hooks"))
+    into(File(rootProject.rootDir, ".git/hooks"))
+    filePermissions { unix("rwxr-xr-x") }
+}
+
+
+gradle.projectsEvaluated {
+    tasks.getByPath(":app:preBuild").dependsOn(tasks.named("installGitHooks"))
+}
