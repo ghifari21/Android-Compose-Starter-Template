@@ -12,16 +12,16 @@ import timber.log.Timber
 @HiltWorker
 class SyncWorker @AssistedInject constructor(
     @Assisted appContext: Context,
-    @Assisted workerParams: WorkerParameters
+    @Assisted workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
 
     override suspend fun doWork(): Result {
         Timber.d("SyncWorker: Starting background synchronization...")
-        
+
         return try {
             // Simulate network or database synchronization
             delay(2000)
-            
+
             Timber.d("SyncWorker: Synchronization completed successfully.")
             Result.success()
         } catch (e: Exception) {

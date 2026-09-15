@@ -10,7 +10,7 @@ class HomeViewModel @Inject constructor(
     private val searchItemsUseCase: SearchItemsUseCase,
     private val notificationManager: com.project.common.notification.AppNotificationManager,
     private val sessionManager: com.project.domain.repository.SessionManager,
-    private val syncRepository: com.project.domain.repository.SyncRepository
+    private val syncRepository: com.project.domain.repository.SyncRepository,
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>(HomeState()) {
 
     init {
@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
                 notificationManager.showNotification(
                     notificationId = 1,
                     title = "Hello from Starter Template!",
-                    message = "This is a local notification triggered via Hilt DI."
+                    message = "This is a local notification triggered via Hilt DI.",
                 )
             }
             is HomeEvent.OnTriggerLogout -> {

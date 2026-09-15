@@ -4,7 +4,7 @@ import com.project.feat.home.domain.model.HomeItem
 
 data class HomeState(
     val items: List<HomeItem> = emptyList(),
-    val searchQuery: String = ""
+    val searchQuery: String = "",
 )
 
 sealed class HomeEvent {

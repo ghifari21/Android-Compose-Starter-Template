@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 @Composable
 fun NotificationPermissionEffect(
     onPermissionGranted: () -> Unit = {},
-    onPermissionDenied: () -> Unit = {}
+    onPermissionDenied: () -> Unit = {},
 ) {
     val context = LocalContext.current
 
@@ -28,7 +28,7 @@ fun NotificationPermissionEffect(
         val permission = Manifest.permission.POST_NOTIFICATIONS
         val isGranted = ContextCompat.checkSelfPermission(
             context,
-            permission
+            permission,
         ) == PackageManager.PERMISSION_GRANTED
 
         val launcher = rememberLauncherForActivityResult(
@@ -39,7 +39,7 @@ fun NotificationPermissionEffect(
                 } else {
                     onPermissionDenied()
                 }
-            }
+            },
         )
 
         LaunchedEffect(Unit) {

@@ -34,7 +34,7 @@ import com.project.feat.home.domain.model.HomeItem
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToDetail: (id: String, title: String) -> Unit
+    navigateToDetail: (id: String, title: String) -> Unit,
 ) {
     val state by viewModel.collectMvi { effect ->
         when (effect) {
@@ -47,12 +47,12 @@ fun HomeScreen(
     com.project.common.notification.NotificationPermissionEffect()
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
         ) {
             // Search Bar
             OutlinedTextField(
@@ -67,7 +67,7 @@ fun HomeScreen(
                     IconButton(onClick = { viewModel.setEvent(HomeEvent.OnSearchClicked) }) {
                         Icon(Icons.Default.Search, contentDescription = "Search")
                     }
-                }
+                },
             )
 
             // Trigger Notification Button
@@ -75,11 +75,11 @@ fun HomeScreen(
                 onClick = { viewModel.setEvent(HomeEvent.OnTriggerNotification) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp)
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
             ) {
                 Text("Trigger Local Notification")
             }
-            
+
             // Logout Button
             androidx.compose.material3.Button(
                 onClick = { viewModel.setEvent(HomeEvent.OnTriggerLogout) },
@@ -87,8 +87,8 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.error
-                )
+                    containerColor = MaterialTheme.colorScheme.error,
+                ),
             ) {
                 Text("Logout")
             }
@@ -100,8 +100,8 @@ fun HomeScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary
-                )
+                    containerColor = MaterialTheme.colorScheme.tertiary,
+                ),
             ) {
                 Text("Sync Data (WorkManager)")
             }
@@ -114,19 +114,19 @@ fun HomeScreen(
                     Text(
                         text = state.error?.message ?: "Unknown Error occurred",
                         color = MaterialTheme.colorScheme.error,
-                        modifier = Modifier.align(Alignment.Center).padding(16.dp)
+                        modifier = Modifier.align(Alignment.Center).padding(16.dp),
                     )
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                     ) {
                         items(state.data.items, key = { it.id }) { item ->
                             HomeItemCard(
                                 item = item,
                                 onClick = {
                                     viewModel.setEvent(HomeEvent.OnItemClicked(item.id, item.title))
-                                }
+                                },
                             )
                         }
                     }
@@ -140,24 +140,24 @@ fun HomeScreen(
 fun HomeItemCard(
     item: HomeItem,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
             .clickable { onClick() },
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = item.title,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 text = item.description,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }

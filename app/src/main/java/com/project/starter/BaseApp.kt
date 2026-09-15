@@ -19,7 +19,7 @@ class BaseApp : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        
+
         // Initialize Timber logging
         Timber.plant(Timber.DebugTree())
     }

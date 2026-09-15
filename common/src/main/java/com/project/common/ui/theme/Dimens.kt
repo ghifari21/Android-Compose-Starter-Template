@@ -15,7 +15,7 @@ data class Dimens(
     val paddingLarge: Dp = 24.dp,
     val cornerSmall: Dp = 4.dp,
     val cornerMedium: Dp = 8.dp,
-    val cornerLarge: Dp = 16.dp
+    val cornerLarge: Dp = 16.dp,
 )
 
 val LocalDimens = compositionLocalOf { Dimens() }

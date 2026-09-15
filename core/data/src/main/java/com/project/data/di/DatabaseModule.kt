@@ -25,7 +25,7 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "app_database"
+            "app_database",
         ).build()
     }
 
@@ -39,7 +39,7 @@ object DatabaseModule {
     @Singleton
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
-            produceFile = { context.preferencesDataStoreFile("settings") }
+            produceFile = { context.preferencesDataStoreFile("settings") },
         )
     }
 }

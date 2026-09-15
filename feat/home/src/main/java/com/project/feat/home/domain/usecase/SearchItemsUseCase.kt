@@ -6,7 +6,7 @@ import com.project.feat.home.domain.repository.HomeRepository
 import javax.inject.Inject
 
 class SearchItemsUseCase @Inject constructor(
-    private val repository: HomeRepository
+    private val repository: HomeRepository,
 ) {
     suspend operator fun invoke(query: String): List<HomeItem> {
         val result = repository.searchItems(query)

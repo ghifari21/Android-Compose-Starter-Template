@@ -4,12 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.navigation.compose.rememberNavController
-import com.project.common.ui.theme.AppTheme
-import com.project.starter.ui.main.MainScreen
-import dagger.hilt.android.AndroidEntryPoint
-
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import com.project.common.ui.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @AndroidEntryPoint

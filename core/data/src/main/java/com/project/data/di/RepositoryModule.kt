@@ -15,12 +15,12 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindExampleRepository(
-        exampleRepositoryImpl: ExampleRepositoryImpl
+        exampleRepositoryImpl: ExampleRepositoryImpl,
     ): ExampleRepository
 
     @Binds
     @Singleton
     abstract fun bindSyncRepository(
-        workManagerSyncRepository: com.project.data.repository.WorkManagerSyncRepository
+        workManagerSyncRepository: com.project.data.repository.WorkManagerSyncRepository,
     ): com.project.domain.repository.SyncRepository
 }

@@ -30,7 +30,7 @@ abstract class BasePagingSource<T : Any> : PagingSource<Int, T>() {
             LoadResult.Page(
                 data = data,
                 prevKey = if (position == initialPageIndex) null else position - 1,
-                nextKey = if (data.isEmpty()) null else position + 1
+                nextKey = if (data.isEmpty()) null else position + 1,
             )
         } catch (exception: Exception) {
             LoadResult.Error(exception)

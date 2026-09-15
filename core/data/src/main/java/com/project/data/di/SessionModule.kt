@@ -17,7 +17,7 @@ object SessionModule {
     @Provides
     @Singleton
     fun provideSessionManager(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): SessionManager {
         return EncryptedSessionManager(context)
     }

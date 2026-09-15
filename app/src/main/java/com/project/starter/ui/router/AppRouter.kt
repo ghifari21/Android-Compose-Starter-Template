@@ -15,7 +15,7 @@ import com.project.starter.ui.main.MainScreen
 @Composable
 fun AppRouter(
     windowSizeClass: androidx.compose.material3.windowsizeclass.WindowSizeClass,
-    viewModel: RouterViewModel = hiltViewModel()
+    viewModel: RouterViewModel = hiltViewModel(),
 ) {
     val routerState by viewModel.routerState.collectAsStateWithLifecycle()
 

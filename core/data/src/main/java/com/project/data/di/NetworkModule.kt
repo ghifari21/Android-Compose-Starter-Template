@@ -37,7 +37,7 @@ object NetworkModule {
         @dagger.hilt.android.qualifiers.ApplicationContext context: android.content.Context,
         loggingInterceptor: HttpLoggingInterceptor,
         authInterceptor: com.project.data.network.AuthInterceptor,
-        tokenAuthenticator: com.project.data.network.TokenAuthenticator
+        tokenAuthenticator: com.project.data.network.TokenAuthenticator,
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
@@ -51,7 +51,7 @@ object NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         json: Json,
-        baseUrl: BaseUrl
+        baseUrl: BaseUrl,
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl.value)

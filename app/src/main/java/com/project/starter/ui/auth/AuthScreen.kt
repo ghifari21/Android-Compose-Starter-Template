@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.project.domain.repository.SessionManager
 import dagger.hilt.android.EntryPointAccessors
 import kotlinx.coroutines.launch
 
@@ -22,18 +21,18 @@ import kotlinx.coroutines.launch
 fun AuthScreen() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    
+
     // In a real app, you would use a ViewModel and inject SessionManager there.
     // This is just a quick shortcut for the dummy AuthScreen.
     val sessionManager = EntryPointAccessors.fromApplication(
         context.applicationContext,
-        AuthEntryPoint::class.java
+        AuthEntryPoint::class.java,
     ).sessionManager()
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text("Login Screen", style = MaterialTheme.typography.headlineMedium)
         Spacer(modifier = Modifier.height(16.dp))

@@ -13,7 +13,7 @@ import javax.inject.Inject
 class ExampleRepositoryImpl @Inject constructor(
     private val apiService: ExampleApiService,
     private val exampleDao: ExampleDao,
-    private val dataStore: ExampleDataStore
+    private val dataStore: ExampleDataStore,
 ) : BaseRepository(), ExampleRepository {
 
     override fun getExample(): Flow<Result<ExampleModel>> {
@@ -21,7 +21,7 @@ class ExampleRepositoryImpl @Inject constructor(
         // In a real scenario, you might want to cache this in Room or DataStore
         return safeCall(
             block = { apiService.getExample() },
-            transform = { it.toModel() }
+            transform = { it.toModel() },
         )
     }
 }

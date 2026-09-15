@@ -116,7 +116,7 @@ abstract class BaseViewModel<Event, State, Effect>(initialStateData: State) : Vi
     protected fun safeLaunch(
         key: String? = null,
         showLoading: Boolean = true,
-        block: suspend () -> Unit
+        block: suspend () -> Unit,
     ) {
         // Single-flight: cancel previous request with the same key to prevent stacking.
         if (key != null) activeRequests.remove(key)?.cancel()
@@ -140,15 +140,15 @@ abstract class BaseViewModel<Event, State, Effect>(initialStateData: State) : Vi
 
         if (key != null) {
             activeRequests[key] = job
-            job.invokeOnCompletion { 
-                if (activeRequests[key] === job) activeRequests.remove(key) 
+            job.invokeOnCompletion {
+                if (activeRequests[key] === job) activeRequests.remove(key)
             }
         }
     }
 
     protected fun launchAsync(
         onLoading: (Boolean) -> Unit,
-        block: suspend () -> Unit
+        block: suspend () -> Unit,
     ) {
         viewModelScope.launch {
             onLoading(true)

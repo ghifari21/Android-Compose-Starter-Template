@@ -18,7 +18,7 @@ sealed class RouterState {
 
 @HiltViewModel
 class RouterViewModel @Inject constructor(
-    sessionManager: SessionManager
+    sessionManager: SessionManager,
 ) : ViewModel() {
 
     val routerState: StateFlow<RouterState> = sessionManager.isLoggedIn()
@@ -28,6 +28,6 @@ class RouterViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = RouterState.Loading
+            initialValue = RouterState.Loading,
         )
 }

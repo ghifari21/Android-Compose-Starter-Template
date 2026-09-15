@@ -22,7 +22,7 @@ class AppNotificationManager(private val context: Context) {
             val channel = NotificationChannel(
                 CHANNEL_ID,
                 CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_HIGH
+                NotificationManager.IMPORTANCE_HIGH,
             ).apply {
                 description = "General notifications for the app"
             }
@@ -34,14 +34,14 @@ class AppNotificationManager(private val context: Context) {
         notificationId: Int,
         title: String,
         message: String,
-        intent: Intent? = null
+        intent: Intent? = null,
     ) {
         val pendingIntent = intent?.let {
             PendingIntent.getActivity(
                 context,
                 0,
                 it,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
         }
 

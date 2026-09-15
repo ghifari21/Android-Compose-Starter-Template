@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ExampleDataStore @Inject constructor(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) {
     companion object {
         private val EXAMPLE_KEY = stringPreferencesKey("example_key")

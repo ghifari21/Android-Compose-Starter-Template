@@ -7,12 +7,12 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class AuthInterceptor @Inject constructor(
-    private val sessionManagerProvider: Provider<EncryptedSessionManager>
+    private val sessionManagerProvider: Provider<EncryptedSessionManager>,
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        
+
         val token = sessionManagerProvider.get().getAccessTokenSync()
         if (!token.isNullOrBlank()) {
             requestBuilder.addHeader("Authorization", "Bearer $token")

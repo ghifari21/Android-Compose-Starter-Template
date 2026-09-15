@@ -25,16 +25,16 @@ private fun <T> Response<T>.handleApiError(): AppException {
     return when (code()) {
         HttpURLConnection.HTTP_UNAUTHORIZED -> AppException.UnauthorizedException(
             message = "Session expired. Please login again.",
-            cause = null
+            cause = null,
         )
         in 500..599 -> AppException.ServerException(
             message = "Server error: ${code()}",
-            cause = null
+            cause = null,
         )
         else -> AppException.ApiException(
             code = code(),
             message = message(),
-            cause = null
+            cause = null,
         )
     }
 }
@@ -49,11 +49,11 @@ fun Throwable.toAppException(): AppException {
         is AppException -> this
         is IOException -> AppException.NetworkException(
             message = "No internet connection. Please check your network.",
-            cause = this
+            cause = this,
         )
         else -> AppException.UnknownException(
             message = this.message ?: "An unexpected error occurred",
-            cause = this
+            cause = this,
         )
     }
 }

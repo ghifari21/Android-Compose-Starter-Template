@@ -20,7 +20,7 @@ class EncryptedSessionManager(context: Context) : SessionManager {
         "secret_shared_prefs",
         masterKey,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
     )
 
     // Using MutableStateFlow to make SharedPreferences reactive
@@ -35,7 +35,7 @@ class EncryptedSessionManager(context: Context) : SessionManager {
             .putString(KEY_ACCESS_TOKEN, accessToken)
             .putString(KEY_REFRESH_TOKEN, refreshToken)
             .apply()
-        
+
         _accessTokenFlow.value = accessToken
         _refreshTokenFlow.value = refreshToken
     }

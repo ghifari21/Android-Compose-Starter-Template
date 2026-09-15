@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 
 /**
  * A base NavHost wrapper that provides default slide transitions for all screens.
- * 
+ *
  * @param navHostController The NavHostController to manage navigation.
  * @param startDestination The starting route, must be a @Serializable class/object.
  * @param builder The NavGraphBuilder block to define the graph.
@@ -20,7 +20,7 @@ inline fun <reified T : Any> BaseNavHost(
     modifier: Modifier = Modifier,
     navHostController: NavHostController,
     startDestination: T,
-    noinline builder: NavGraphBuilder.() -> Unit
+    noinline builder: NavGraphBuilder.() -> Unit,
 ) {
     NavHost(
         modifier = modifier,
@@ -30,28 +30,28 @@ inline fun <reified T : Any> BaseNavHost(
         enterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
-                animationSpec = tween(300)
+                animationSpec = tween(300),
             )
         },
         exitTransition = {
             slideOutOfContainer(
                 AnimatedContentTransitionScope.SlideDirection.Left,
-                animationSpec = tween(300)
+                animationSpec = tween(300),
             )
         },
 
         popEnterTransition = {
             slideIntoContainer(
                 AnimatedContentTransitionScope.SlideDirection.Right,
-                animationSpec = tween(300)
+                animationSpec = tween(300),
             )
         },
         popExitTransition = {
             slideOutOfContainer(
                 AnimatedContentTransitionScope.SlideDirection.Right,
-                animationSpec = tween(300)
+                animationSpec = tween(300),
             )
         },
-        builder = builder
+        builder = builder,
     )
 }

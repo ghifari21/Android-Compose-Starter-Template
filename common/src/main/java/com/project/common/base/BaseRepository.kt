@@ -29,7 +29,7 @@ abstract class BaseRepository {
     protected fun <T, R> safeCall(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
         block: suspend () -> T,
-        transform: (T) -> R
+        transform: (T) -> R,
     ): Flow<Result<R>> = flow {
         emit(Result.success(transform(block())))
     }.catch { e ->
@@ -47,6 +47,6 @@ abstract class BaseRepository {
      */
     protected fun <T> safeCall(
         dispatcher: CoroutineDispatcher = Dispatchers.IO,
-        block: suspend () -> T
+        block: suspend () -> T,
     ): Flow<Result<T>> = safeCall(dispatcher, block) { it }
 }

@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
  */
 @Composable
 inline fun <reified Event, reified StateData, reified Effect> BaseViewModel<Event, StateData, Effect>.collectMvi(
-    crossinline onEffect: (Effect) -> Unit
+    crossinline onEffect: (Effect) -> Unit,
 ): State<UiState<StateData>> {
     val state = this.uiState.collectAsState()
 

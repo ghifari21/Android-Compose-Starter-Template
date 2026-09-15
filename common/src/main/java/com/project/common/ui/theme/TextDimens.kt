@@ -12,7 +12,7 @@ data class TextDimens(
     val extraLarge: TextUnit = 20.sp,
     val headlineSmall: TextUnit = 24.sp,
     val headlineMedium: TextUnit = 28.sp,
-    val headlineLarge: TextUnit = 32.sp
+    val headlineLarge: TextUnit = 32.sp,
 )
 
 val LocalTextDimens = compositionLocalOf { TextDimens() }

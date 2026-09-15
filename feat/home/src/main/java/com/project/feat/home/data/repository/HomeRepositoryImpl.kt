@@ -12,13 +12,13 @@ class HomeRepositoryImpl @Inject constructor() : HomeRepository {
         HomeItem("2", "MVI Pattern", "Model-View-Intent untuk state management yang predictable."),
         HomeItem("3", "Jetpack Compose", "Membangun UI deklaratif di Android dengan mudah."),
         HomeItem("4", "Kotlin Coroutines", "Manajemen asynchronous programming yang sangat efisien."),
-        HomeItem("5", "Hilt Dependency Injection", "Mempermudah penyediaan dependency pada aplikasi.")
+        HomeItem("5", "Hilt Dependency Injection", "Mempermudah penyediaan dependency pada aplikasi."),
     )
 
     override suspend fun searchItems(query: String): List<HomeItem> {
         // Simulate network delay
         delay(1000)
-        
+
         return if (query.trim().isEmpty()) {
             mockData
         } else {

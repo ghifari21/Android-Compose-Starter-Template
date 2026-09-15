@@ -3,20 +3,18 @@ package com.project.starter.ui.main
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.NavigationRail
-import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -36,7 +34,7 @@ data class BottomNavItem(
     val route: KClass<*>,
     val routeObject: Any,
     val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector
+    val unselectedIcon: ImageVector,
 )
 
 val bottomNavItems = listOf(
@@ -45,17 +43,16 @@ val bottomNavItems = listOf(
         route = HomeRoute::class,
         routeObject = HomeRoute,
         selectedIcon = Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home
+        unselectedIcon = Icons.Outlined.Home,
     ),
     // Placeholder for another tab (e.g., Profile)
     // BottomNavItem("Profile", ProfileRoute::class, ProfileRoute, Icons.Filled.Person, Icons.Outlined.Person)
 )
 
-
 @Composable
 fun MainScreen(
     windowSizeClass: WindowSizeClass,
-    mainNavController: NavHostController = rememberNavController()
+    mainNavController: NavHostController = rememberNavController(),
 ) {
     val isCompact = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
 
@@ -79,24 +76,24 @@ fun MainScreen(
                                 icon = {
                                     Icon(
                                         imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
-                                        contentDescription = item.title
+                                        contentDescription = item.title,
                                     )
                                 },
                                 label = { Text(item.title) },
                                 selected = isSelected,
-                                onClick = { navigateToTopLevel(mainNavController, item.routeObject) }
+                                onClick = { navigateToTopLevel(mainNavController, item.routeObject) },
                             )
                         }
                     }
                 }
-            }
+            },
         ) { innerPadding ->
             BaseNavHost(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
                 navHostController = mainNavController,
-                startDestination = HomeRoute
+                startDestination = HomeRoute,
             ) {
                 homeGraph(mainNavController)
             }
@@ -112,12 +109,12 @@ fun MainScreen(
                             icon = {
                                 Icon(
                                     imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
-                                    contentDescription = item.title
+                                    contentDescription = item.title,
                                 )
                             },
                             label = { Text(item.title) },
                             selected = isSelected,
-                            onClick = { navigateToTopLevel(mainNavController, item.routeObject) }
+                            onClick = { navigateToTopLevel(mainNavController, item.routeObject) },
                         )
                     }
                 }
@@ -125,7 +122,7 @@ fun MainScreen(
             BaseNavHost(
                 modifier = Modifier.fillMaxSize(),
                 navHostController = mainNavController,
-                startDestination = HomeRoute
+                startDestination = HomeRoute,
             ) {
                 homeGraph(mainNavController)
             }

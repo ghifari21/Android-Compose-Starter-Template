@@ -8,5 +8,5 @@ import com.project.common.exception.AppException
 data class UiState<T>(
     val data: T,
     val isLoading: Boolean = false,
-    val error: AppException? = null
+    val error: AppException? = null,
 )

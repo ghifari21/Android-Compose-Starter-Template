@@ -16,7 +16,7 @@ object NotificationModule {
     @Provides
     @Singleton
     fun provideAppNotificationManager(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): AppNotificationManager {
         return AppNotificationManager(context)
     }

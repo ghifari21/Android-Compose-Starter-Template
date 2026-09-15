@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 fun DetailScreen(
     id: String,
     title: String,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -35,28 +35,28 @@ fun DetailScreen(
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Back",
                         )
                     }
-                }
+                },
             )
-        }
+        },
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = "ID: $id",
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "Title: $title",
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
                 )
             }
         }

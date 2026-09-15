@@ -31,7 +31,7 @@ class HomeViewModelTest {
             searchItemsUseCase = searchItemsUseCase,
             notificationManager = notificationManager,
             sessionManager = sessionManager,
-            syncRepository = syncRepository
+            syncRepository = syncRepository,
         )
     }
 
@@ -40,7 +40,7 @@ class HomeViewModelTest {
         // Arrange
         val expectedItems = listOf(
             HomeItem("1", "Title 1", "Desc 1"),
-            HomeItem("2", "Title 2", "Desc 2")
+            HomeItem("2", "Title 2", "Desc 2"),
         )
         coEvery { searchItemsUseCase("") } returns expectedItems
 

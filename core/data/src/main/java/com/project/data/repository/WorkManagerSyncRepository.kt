@@ -9,14 +9,14 @@ import com.project.domain.repository.SyncRepository
 import javax.inject.Inject
 
 class WorkManagerSyncRepository @Inject constructor(
-    private val workManager: WorkManager
+    private val workManager: WorkManager,
 ) : SyncRepository {
     override fun syncNow() {
         val syncRequest = OneTimeWorkRequestBuilder<SyncWorker>()
             .setConstraints(
                 Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
+                    .build(),
             )
             .build()
         workManager.enqueue(syncRequest)

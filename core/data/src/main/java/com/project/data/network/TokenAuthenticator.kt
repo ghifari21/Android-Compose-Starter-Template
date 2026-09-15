@@ -11,7 +11,7 @@ import javax.inject.Provider
 
 class TokenAuthenticator @Inject constructor(
     // Use Provider to avoid circular dependency if SessionManager/Authenticator depend on Retrofit
-    private val sessionManagerProvider: Provider<EncryptedSessionManager>
+    private val sessionManagerProvider: Provider<EncryptedSessionManager>,
 ) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
@@ -20,7 +20,7 @@ class TokenAuthenticator @Inject constructor(
 
         synchronized(this) {
             val newToken = sessionManager.getAccessTokenSync()
-            
+
             // If the token has changed since the request was made, use the new token.
             if (currentToken != newToken) {
                 return response.request.newBuilder()

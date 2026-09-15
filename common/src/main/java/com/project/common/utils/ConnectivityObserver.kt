@@ -16,7 +16,10 @@ interface ConnectivityObserver {
     fun observe(): Flow<Status>
 
     enum class Status {
-        Available, Unavailable, Losing, Lost
+        Available,
+        Unavailable,
+        Losing,
+        Lost,
     }
 }
 
@@ -24,7 +27,7 @@ interface ConnectivityObserver {
  * Implementation of [ConnectivityObserver] using [ConnectivityManager].
  */
 class NetworkConnectivityObserver(
-    context: Context
+    context: Context,
 ) : ConnectivityObserver {
 
     private val connectivityManager =

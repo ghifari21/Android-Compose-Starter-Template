@@ -5,7 +5,7 @@ package com.project.common.exception
  */
 sealed class AppException(
     message: String? = null,
-    cause: Throwable? = null
+    cause: Throwable? = null,
 ) : Exception(message, cause) {
 
     /**
@@ -13,7 +13,7 @@ sealed class AppException(
      */
     class NetworkException(
         message: String? = "No internet connection",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 
     /**
@@ -21,7 +21,7 @@ sealed class AppException(
      */
     class ServerException(
         message: String? = "Server error occurred",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 
     /**
@@ -32,7 +32,7 @@ sealed class AppException(
     class ApiException(
         val code: Int,
         message: String? = "API error occurred",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 
     /**
@@ -40,7 +40,7 @@ sealed class AppException(
      */
     class UnauthorizedException(
         message: String? = "Unauthorized access",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 
     /**
@@ -48,7 +48,7 @@ sealed class AppException(
      */
     class LocalStorageException(
         message: String? = "Local storage error occurred",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 
     /**
@@ -56,6 +56,6 @@ sealed class AppException(
      */
     class UnknownException(
         message: String? = "Unknown error occurred",
-        cause: Throwable? = null
+        cause: Throwable? = null,
     ) : AppException(message, cause)
 }

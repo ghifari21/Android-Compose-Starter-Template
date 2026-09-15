@@ -12,7 +12,7 @@ fun NavGraphBuilder.homeGraph(navController: NavController) {
         HomeScreen(
             navigateToDetail = { id, title ->
                 navController.navigate(DetailRoute(id = id, title = title))
-            }
+            },
         )
     }
 
@@ -21,7 +21,7 @@ fun NavGraphBuilder.homeGraph(navController: NavController) {
         DetailScreen(
             id = args.id,
             title = args.title,
-            onNavigateBack = { navController.popBackStack() }
+            onNavigateBack = { navController.popBackStack() },
         )
     }
 }

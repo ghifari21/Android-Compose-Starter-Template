@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ExampleModel(
-    val id: String?
+    val id: String?,
 ) : Parcelable
